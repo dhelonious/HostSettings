@@ -1,0 +1,42 @@
+[
+    {
+        "caption": "Preferences",
+        "mnemonic": "n",
+        "id": "preferences",
+        "children":
+        [
+            {
+                "caption": "Host Settings",
+                "children":
+                [
+
+                    {
+                        "caption": "Settings – Global",
+                        "command": "open_file",
+                        "args":
+                        {
+                            "file": "${packages}/User/Preferences (All).sublime-settings",
+                            "contents": "// Settings in here override those in \"Default/Preferences.sublime-settings\",\n// and are overridden in turn by syntax-specific settings.\n{\n\t$0\n}\n"
+                        }
+                    },
+                    {
+                        "caption": "Settings – Local",
+                        "command": "host_settings_edit",
+                        "args":
+                        {
+                            "default": "// Settings in here override those in \"Default/Preferences.sublime-settings\",\n// and are overridden in turn by syntax-specific settings.\n{\n\t$0\n}\n"
+                        }
+                    },
+                    {
+                        "caption": "Update User Settings File",
+                        "command": "host_settings_update"
+                    },
+                    {
+                        "caption": "Synchronize Settings Files",
+                        "command": "host_settings_sync"
+                    }
+                ]
+            }
+        ]
+    }
+]
