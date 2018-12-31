@@ -68,10 +68,10 @@ def sync_settings():
     console_print("Synchronizing `{}' and `{}'".format(SETTINGS["global"], SETTINGS["local"]))
 
     for key in load_user_resource_keys(SETTINGS["user"]):
-        if LOADED["local"].has(key):
-            copy_and_update_settings(key, "user", "local")
-        else:
+        if LOADED["global"].has(key):
             copy_and_update_settings(key, "user", "global")
+        else:
+            copy_and_update_settings(key, "user", "local")
 
 def plugin_loaded():
     global LOADED
