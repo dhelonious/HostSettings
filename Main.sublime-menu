@@ -36,6 +36,22 @@
                         "command": "host_settings_sync"
                     }
                 ]
+            },
+            {
+                "caption": "Package Settings",
+                "mnemonic": "P",
+                "id": "package-settings",
+                "children":
+                [
+                    {
+                        "caption": "HostSettings",
+                        "command": "edit_settings",
+                        "args": {
+                            "base_file": "${packages}/HostSettings/HostSettings.sublime-settings",
+                            "default": "// HostSettings user settings in here override the default settings.\n{\n\t$0\n}\n"
+                        }
+                    }
+                ]
             }
         ]
     }

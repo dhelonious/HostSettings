@@ -1,0 +1,4 @@
+{
+    // Interval of synchronization to user settings in seconds:
+    "sync_interval": 60
+}
