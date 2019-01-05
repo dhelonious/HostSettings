@@ -6,10 +6,10 @@ import sublime_plugin
 SETTINGS = {
     "user": "Preferences.sublime-settings",
     "global": "Preferences (All).sublime-settings",
-    "local": "Preferences ({}).sublime-settings".format(platform.node()),
     "package": "HostSettings.sublime-settings",
 }
-LOADED = { key: None for key in list(SETTINGS) }
+LOADED = {}
+HOSTNAME = platform.node()
 
 def console_print(msg):
     print("HostSettings: {}".format(msg))
@@ -33,10 +33,6 @@ def copy_settings(key, from_settings, into_settings):
         return True
     else:
         return False
-
-def copy_and_update_settings(key, from_settings, into_settings):
-    if copy_settings(key, from_settings, into_settings):
-        sublime.save_settings(SETTINGS[into_settings])
 
 def clear_unknown_settings():
     console_print("Removing unknown keys from `{}'".format(SETTINGS["user"]))
@@ -78,9 +74,18 @@ def sync_settings():
     sublime.save_settings(SETTINGS["local"])
 
 def plugin_loaded():
+    global SETTINGS
     global LOADED
-    for settings_type in list(SETTINGS):
-        LOADED[settings_type] = sublime.load_settings(SETTINGS[settings_type])
+
+    for settings_type, settings_file in SETTINGS.items():
+        LOADED[settings_type] = sublime.load_settings(settings_file)
+
+    alias = LOADED["package"].get("alias", {})
+    SETTINGS["local"] = "Preferences ({}).sublime-settings".format(
+        alias.get(HOSTNAME, HOSTNAME)
+    )
+    LOADED["local"] = sublime.load_settings(SETTINGS["local"])
+    console_print("Local settings: `{}'".format(SETTINGS["local"]))
 
     update_user_settings()
 

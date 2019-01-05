@@ -1,4 +1,9 @@
 {
     // Interval of synchronization to user settings in seconds:
-    "sync_interval": 60
+    "sync_interval": 60,
+    // List of hostname aliases:
+    //   Example:
+    //     "alias": { "HOST1": "MY PC" }
+    //     -> `Preferences (MY PC).sublime-settings'
+    "alias": {}
 }
