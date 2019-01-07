@@ -80,6 +80,7 @@ def plugin_loaded():
     for settings_type, settings_file in SETTINGS.items():
         LOADED[settings_type] = sublime.load_settings(settings_file)
 
+    # TODO: use re.match to get settings alias
     alias = LOADED["package"].get("alias", {})
     SETTINGS["local"] = "Preferences ({}).sublime-settings".format(
         alias.get(HOSTNAME, HOSTNAME)
