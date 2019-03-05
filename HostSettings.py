@@ -44,6 +44,8 @@ def clear_unknown_settings():
 def update_user_settings():
     console_print("Updating `{}'".format(SETTINGS["user"]))
 
+    # NOTE: creates callback on every call of `update_user_settings'
+    # TODO: memorize callbacks and create them only for unknown keys
     for settings_type in ("global", "local"):
         for key in load_user_resource_keys(SETTINGS[settings_type]):
             def make_callback(key, settings):
